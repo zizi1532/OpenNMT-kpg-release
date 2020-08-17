@@ -63,7 +63,7 @@ in_path_ls = [IN_DIR + in_path for in_path in sorted(os.listdir(IN_DIR))]
 for in_path in in_path_ls:
     print(os.path.abspath(__file__))
     print(os.path.basename(os.path.abspath(__file__)))
-    print(os.path.basedir(os.path.abspath(__file__)))
+    print(os.path.dirname(os.path.abspath(__file__)))
     exit()
     src_out_path = "{}-src.txt".format(os.path.basename(in_path))
     tgt_out_path = "../{}-tgt.txt".format(os.path.basename(in_path))
