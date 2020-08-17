@@ -22,8 +22,10 @@ FIELDS = [
     # '#QUERY_TEXT:', '#URL:', '#CLICK_COUNT',
 ]
 def preprocess(v):
-    if "\t" in v:
-        return v.split("\t")[1]
+    if "\n" in v:
+        v = v.split("\n")
+        v = [_v for _v in v if "\t" not in _v else _v.split("\t")[1]]
+        v = "\n".join("\n")
     else:
         return v
 in_path_ls = [IN_DIR + in_path for in_path in sorted(os.listdir(IN_DIR))]
