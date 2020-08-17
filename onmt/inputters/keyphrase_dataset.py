@@ -89,8 +89,8 @@ class KeyphraseDataset(TorchtextDataset):
         # self.src_vocabs is used in collapse_copy_scores and Translator.py
         self.src_vocabs = []
         examples = []
-        print(read_iters);exit()
         for ex_dict in starmap(_join_dicts, zip(*read_iters)):
+            print(ex_dict);exit()
             if can_copy:
                 src_field = fields['src']
                 tgt_field = fields['tgt']
