@@ -1,5 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+""" Custom Preprocessing
+Original data format:
+# data separation: \n
+# data format: [url]\t[gdid]\t[raw_json_content]\n
+# [raw_json_content] type: raw string of json
+#                    , e.g., [content_dict] = json.loads(raw_json_content)
+# [content_dict] type: json
+# [content_dict] info: 
+#   click_query = content_dict["click_query_list"]
+#   present_click_query = content_dict["present_click_query_list"]
+#       query separation: |
+#       query format: [click_cnt]\t[query]\n
+"""
+
 """
     Pre-process Data / features files and build vocabulary
 """
