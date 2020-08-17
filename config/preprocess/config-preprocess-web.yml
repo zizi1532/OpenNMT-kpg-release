@@ -1,0 +1,19 @@
+data_type: keyphrase
+
+train_src: data/web/src-train.txt
+train_tgt: data/web/tgt-train.txt
+valid_src: data/web/src-valid.txt
+valid_tgt: data/web/tgt-valid.txt
+
+save_data: data/web
+shard_size: 100000
+dynamic_dict: 'true'
+share_vocab: 'true'
+
+src_seq_length_trunc: 512
+tgt_seq_length_trunc: 8
+lower: 'true'
+filter_valid: 'false'
+
+report_every: 1000
+log_file: data/web/preprocess.web.log

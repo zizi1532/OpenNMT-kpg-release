@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-""" Custom Preprocessing
-Original data format:
+""" Original data format:
 # data separation: \n
 # data format: [url]\t[gdid]\t[raw_json_content]\n
 # [raw_json_content] type: raw string of json
@@ -12,11 +11,15 @@ Original data format:
 #   present_click_query = content_dict["present_click_query_list"]
 #       query separation: |
 #       query format: [click_cnt]\t[query]\n
+"""
 
+#! 이전에 construct_web_data.py 가 먼저 수행되야함
+""" file_ls: [src/tgt]-[train/valid/test].txt
 # (coarsely processed data format)
 # src: list of raw json data: dict[field:value]
 # tgt: list of raw json data: list of keyphrases
 """
+
 
 """
     Pre-process Data / features files and build vocabulary
