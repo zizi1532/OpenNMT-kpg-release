@@ -66,6 +66,7 @@ for in_path in in_path_ls:
         for line in data:
             url, gdid, raw_content = line.strip().split("\t")
             content_dict = json.loads(raw_content)
+            print(content_dict)
             src_dict = {
                 k:preprocess(v)
                 for k, v in content_dict.items()
