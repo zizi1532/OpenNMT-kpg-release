@@ -84,5 +84,5 @@ for in_path in in_path_ls:
             tgt = [dat.split("\t")[1] for dat in tgt.split("|")]
             src_json = json.dumps(src_dict)
             tgt_json = json.dumps(tgt)
-            fp_write_src.write(src_json)
-            fp_write_tgt.write(tgt_json)
+            fp_write_src.write(src_json+"\n")
+            fp_write_tgt.write(tgt_json+"\n")
