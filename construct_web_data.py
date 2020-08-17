@@ -55,8 +55,10 @@ def preprocess(v):
         v = v.split("\n")
         v = [_v if "\t" not in _v else _v.split("\t")[1] for _v in v]
         v = "\n".join("\n")
+        return v if v.strip() else None
     else:
-        return v if "\t" not in v else v.split("\t")[1]
+        v = v if "\t" not in v else v.split("\t")[1]
+        return v if v.strip() else None
 in_path_ls = [IN_DIR + in_path for in_path in sorted(os.listdir(IN_DIR))]
 for in_path in in_path_ls:
     with open(in_path, "r", encoding="utf8") as fp:
