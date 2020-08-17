@@ -66,6 +66,7 @@ basename = os.path.basename(current_file_path)
 for in_path in in_path_ls:
     src_out_path = "{}/{}-src.txt".format(dirname, basename)
     tgt_out_path = "{}/{}-tgt.txt".format(dirname, basename)
+    print(src_out_path);exit()
     with open(in_path, "r", encoding="utf8") as fp_read, \
         open(src_out_path, "w", encoding="utf8") as fp_write_src,\
         open(tgt_out_path, "w", encoding="utf8") as fp_write_tgt:
