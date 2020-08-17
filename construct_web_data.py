@@ -64,8 +64,8 @@ for in_path in in_path_ls:
     src_out_path = "../{}-src.txt".format(os.path.basename(in_path))
     tgt_out_path = "../{}-tgt.txt".format(os.path.basename(in_path))
     with open(in_path, "r", encoding="utf8") as fp_read, \
-        open(src_out_path, "w", encoding="utf8") as fp_write,\
-        open(tgt_out_path, "w", encoding="utf8") as fp_write:
+        open(src_out_path, "w", encoding="utf8") as fp_write_src,\
+        open(tgt_out_path, "w", encoding="utf8") as fp_write_tgt:
         data = fp_read.readlines()
         for line in data:
             url, gdid, raw_content = line.strip().split("\t")
@@ -81,5 +81,5 @@ for in_path in in_path_ls:
             tgt = [dat.split("\t")[1] for dat in tgt.split("|")]
             src_json = json.dumps(src_dict)
             tgt_json = json.dumps(tgt)
-            src_out_path.write(src_json)
-            tgt_out_path.write(tgt_json)
+            fp_write_src.write(src_json)
+            fp_write_tgt.write(tgt_json)
