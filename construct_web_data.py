@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os, json
 os.environ["PYTHONIOENCODING"] = "utf-8"
 
