@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import os, json
+os.environ["PYTHONIOENCODING"] = "utf-8"
+
 IN_DIR = "./data/web/data/"
 FIELDS = [
     '#HOST_KEYWORDS_ANCHOR:', '#META_KEYWORDS:', '#DIRECT_KEYWORDS',
