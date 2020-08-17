@@ -24,7 +24,7 @@ FIELDS = [
 def preprocess(v):
     if "\n" in v:
         v = v.split("\n")
-        v = [_v for _v in v if "\t" not in _v else _v.split("\t")[1]]
+        v = [_v if "\t" not in _v else _v.split("\t")[1] for _v in v]
         v = "\n".join("\n")
     else:
         return v
