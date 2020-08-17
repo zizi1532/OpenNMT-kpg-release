@@ -3,8 +3,10 @@ os.environ["PYTHONIOENCODING"] = "utf-8"
 
 IN_DIR = "./data/web/data/"
 FIELDS = [
-    '#HOST_KEYWORDS_ANCHOR:', '#META_KEYWORDS:', '#DIRECT_KEYWORDS',
-    '#BREAD_CRUMB:', '#BREAD_CRUMB_PARENT:', 
+    '#HOST_KEYWORDS_ANCHOR:', '#META_KEYWORDS:', 
+    # '#DIRECT_KEYWORDS', #* 값이 없음
+    '#BREAD_CRUMB:', 
+    '#BREAD_CRUMB_PARENT:', 
     '#DESC:', 
     '#BODY_LARGER:', '#BODY_TOP:', '#BODY_TEXT:', 
     '#NONBODY_TEXT:',
@@ -13,14 +15,41 @@ FIELDS = [
     '#IN_DOMAIN_ANCHOR:', '#OUT_DOMAIN_ANCHOR:', 
     '#FIRST_OUT_DOMAIN_TITLE:', '#ONLY_OUT_DOMAIN_TITLE:', '#OUT_DOMAIN_TITLE:', 
     
-    '#SUBLINK_ALIAS:', "#SUBLINK_TITLE:",
+    # '#SUBLINK_ALIAS:', "#SUBLINK_TITLE:", #* 값이 없음
+    
     '#SITE_NAME:',
     
-    '#URL_DOMAIN_ELEMENTS:', '#URL_PATH_ELEMENTS:', '#URL_PLD_ELEMENTS:', 
-    '#URL_QUERY_ELEMENTS:', '#URL_SUBDOMAIN_ELEMENTS:',
+    #* precision, recall 이 너무 낮음
+    # '#URL_PATH_ELEMENTS:', 
+    # '#URL_DOMAIN_ELEMENTS:', '#URL_PLD_ELEMENTS:', '#URL_QUERY_ELEMENTS:', '#URL_SUBDOMAIN_ELEMENTS:', 
 
     # '#QUERY_TEXT:', '#URL:', '#CLICK_COUNT',
 ]
+# * seq (a sequence of words), 
+# * multi-seq (sequences of words), 
+# * list (words without sequential order)
+FIELD_TO_type = {
+    "#HOST_KEYWORDS_ANCHOR:":"multi-seq",
+    "#META_KEYWORDS:":"list",
+    "#BREAD_CRUMB:":"seq",
+    "#BREAD_CRUMB_PARENT:":"seq",
+    "#DESC:":"seq",
+    "#BODY_LARGER:": "seq",
+    "#BODY_TOP:":"seq",
+    "#BODY_TEXT:":"seq",
+    "#NONBODY_TEXT:":"seq",
+    "#HTML_H1:":"seq",
+    "#HTML_H2:":"seq",
+    "#HTML_H3:":"seq",
+    "#HTML_TITLE:":"seq",
+    "#HTML_TITLE_HEAD:":"list",
+    "#IN_DOMAIN_ANCHOR:":"multi-seq",
+    "#OUT_DOMAIN_ANCHOR:":"multi-seq",
+    "#FIRST_OUT_DOMAIN_TITLE:":"multi-seq",
+    "#ONLY_OUT_DOMAIN_TITLE:":"multi-seq",
+    "#OUT_DOMAIN_TITLE:":"multi-seq",
+    "#SITE_NAME:":"seq",
+}
 def preprocess(v):
     if "\n" in v:
         v = v.split("\n")
