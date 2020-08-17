@@ -62,8 +62,8 @@ def preprocess(v):
 in_path_ls = [IN_DIR + in_path for in_path in sorted(os.listdir(IN_DIR))]
 current_file_path = os.path.abspath(__file__)
 dirname = os.path.dirname(current_file_path)+"/data/web"
-basename = os.path.basename(current_file_path)
 for in_path in in_path_ls:
+    basename = os.path.basename(in_path)
     src_out_path = "{}/{}-src.txt".format(dirname, basename)
     tgt_out_path = "{}/{}-tgt.txt".format(dirname, basename)
     print(src_out_path);exit()
