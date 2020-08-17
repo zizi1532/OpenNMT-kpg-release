@@ -12,6 +12,10 @@ Original data format:
 #   present_click_query = content_dict["present_click_query_list"]
 #       query separation: |
 #       query format: [click_cnt]\t[query]\n
+
+# (coarsely processed data format)
+# src: list of raw json data: dict[field:value]
+# tgt: list of raw json data: list of keyphrases
 """
 
 """

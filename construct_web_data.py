@@ -1,4 +1,4 @@
-import os, json
+import os, json, numpy as np
 os.environ["PYTHONIOENCODING"] = "utf-8"
 
 IN_DIR = "./data/web/data/"
@@ -62,6 +62,47 @@ def preprocess(v):
 in_path_ls = [IN_DIR + in_path for in_path in sorted(os.listdir(IN_DIR))]
 current_file_path = os.path.abspath(__file__)
 dirname = os.path.dirname(current_file_path)+"/data/web"
+src_json_data = []
+tgt_json_data = []
+for in_path in in_path_ls:
+    with open(in_path, "r", encoding="utf8") as fp_read:
+        data = fp_read.readlines()
+        for line in data:
+            url, gdid, raw_content = line.strip().split("\t")
+            content_dict = json.loads(raw_content)
+            src_dict = {
+                k:preprocess(v)
+                for k, v in content_dict.items()
+                if k in FIELDS
+            }
+            tgt = content_dict["present_click_query_list"]\
+                if "present_click_query_list" in content_dict\
+                else  content_dict["click_query_list"]
+            tgt = [dat.split("\t")[1] for dat in tgt.split("|")]
+            src_json = json.dumps(src_dict)
+            tgt_json = json.dumps(tgt)
+            src_json_data.append(src_json+"\n")
+            tgt_json_data.append(tgt_json+"\n")
+
+shuffle_index = np.random.permutation(len(src_json_data))
+n_valid, n_test = 1000, 1000
+n_train = len(shuffle_index) -n_valid -n_test
+idx_train = shuffle_index[:n_train]
+idx_valid = shuffle_index[n_train:n_train+n_valid]
+idx_test = shuffle_index[n_train+n_valid:]
+for data_type, idx_ls in [
+    ("valid", idx_valid),
+    ("test", idx_test),
+    ("train", idx_train)
+]:
+    src_path = "{}/src-{}.txt".format(dirname, data_type)
+    tgt_path = "{}/tgt-{}.txt".format(dirname, data_type)
+    with open(src_path, "w", encoding="utf8") as src_write\
+        ,open(tgt_path, "w", encoding="utf8") as tgt_write :
+        for idx in idx_ls:
+            src_write.write(src_json_data[idx])
+            tgt_write.write(tgt_json_data[idx])
+"""
 for in_path in in_path_ls:
     basename = os.path.basename(in_path)
     src_out_path = "{}/{}-src.txt".format(dirname, basename)
@@ -86,3 +127,4 @@ for in_path in in_path_ls:
             tgt_json = json.dumps(tgt)
             fp_write_src.write(src_json+"\n")
             fp_write_tgt.write(tgt_json+"\n")
+"""         
