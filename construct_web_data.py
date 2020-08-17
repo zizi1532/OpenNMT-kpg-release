@@ -61,21 +61,25 @@ def preprocess(v):
         return v if v.strip() else None
 in_path_ls = [IN_DIR + in_path for in_path in sorted(os.listdir(IN_DIR))]
 for in_path in in_path_ls:
-    with open(in_path, "r", encoding="utf8") as fp:
-        data = fp.readlines()
+    src_out_path = "../src-{}.txt".format(os.path.basename(in_path_ls))
+    tgt_out_path = "../tgt-{}.txt".format(os.path.basename(in_path_ls))
+    with open(in_path, "r", encoding="utf8") as fp_read, \
+        open(src_out_path, "r", encoding="utf8") as fp_write,\
+        open(tgt_out_path, "r", encoding="utf8") as fp_write:
+        data = fp_read.readlines()
         for line in data:
             url, gdid, raw_content = line.strip().split("\t")
             content_dict = json.loads(raw_content)
-            print(content_dict)
             src_dict = {
                 k:preprocess(v)
                 for k, v in content_dict.items()
                 if k in FIELDS
             }
-            print(src_dict)
             tgt = content_dict["present_click_query_list"]\
                 if "present_click_query_list" in content_dict\
                 else  content_dict["click_query_list"]
-            tgt = "|".join([dat.split("\t")[1] for dat in tgt.split("|")])
-            print(tgt)
-            exit()
+            tgt = [dat.split("\t")[1] for dat in tgt.split("|")]
+            src_json = json.dumps(src_dict)
+            tgt_json = json.dumps(tgt)
+            src_out_path.write(src_json)
+            tgt_out_path.write(tgt_json)
