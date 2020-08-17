@@ -61,11 +61,11 @@ def preprocess(v):
         return v if v.strip() else None
 in_path_ls = [IN_DIR + in_path for in_path in sorted(os.listdir(IN_DIR))]
 for in_path in in_path_ls:
-    src_out_path = "../src-{}.txt".format(os.path.basename(in_path))
-    tgt_out_path = "../tgt-{}.txt".format(os.path.basename(in_path))
+    src_out_path = "../{}-src.txt".format(os.path.basename(in_path))
+    tgt_out_path = "../{}-tgt.txt".format(os.path.basename(in_path))
     with open(in_path, "r", encoding="utf8") as fp_read, \
-        open(src_out_path, "r", encoding="utf8") as fp_write,\
-        open(tgt_out_path, "r", encoding="utf8") as fp_write:
+        open(src_out_path, "w", encoding="utf8") as fp_write,\
+        open(tgt_out_path, "w", encoding="utf8") as fp_write:
         data = fp_read.readlines()
         for line in data:
             url, gdid, raw_content = line.strip().split("\t")
