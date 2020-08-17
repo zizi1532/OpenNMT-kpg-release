@@ -14,7 +14,8 @@ class TextDataReader(DataReaderBase):
 
         Args:
             sequences (str or Iterable[str]):
-                path to text file or iterable of the actual text data.
+                path to text file (str) 
+                or iterable of the actual text data (Iterable[str]).
             side (str): Prefix used in return dict. Usually
                 ``"src"`` or ``"tgt"``.
             _dir (NoneType): Leave as ``None``. This parameter exists to

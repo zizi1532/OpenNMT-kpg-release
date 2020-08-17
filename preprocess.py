@@ -16,6 +16,7 @@ Original data format:
 
 """
     Pre-process Data / features files and build vocabulary
+    $ python preprocess.py -config config/preprocess/config-preprocess-keyphrase-kp20k.yml
 """
 import codecs
 import glob
