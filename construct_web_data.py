@@ -60,13 +60,12 @@ def preprocess(v):
         v = v if "\t" not in v else v.split("\t")[1]
         return v if v.strip() else None
 in_path_ls = [IN_DIR + in_path for in_path in sorted(os.listdir(IN_DIR))]
+current_file_path = os.path.abspath(__file__)
+dirname = os.path.dirname(current_file_path)
+basename = os.path.basename(current_file_path)
 for in_path in in_path_ls:
-    print(os.path.abspath(__file__))
-    print(os.path.basename(os.path.abspath(__file__)))
-    print(os.path.dirname(os.path.abspath(__file__)))
-    exit()
-    src_out_path = "{}-src.txt".format(os.path.basename(in_path))
-    tgt_out_path = "../{}-tgt.txt".format(os.path.basename(in_path))
+    src_out_path = "{}/{}-src.txt".format(dirname, basename)
+    tgt_out_path = "{}/{}-tgt.txt".format(dirname, basename)
     with open(in_path, "r", encoding="utf8") as fp_read, \
         open(src_out_path, "w", encoding="utf8") as fp_write_src,\
         open(tgt_out_path, "w", encoding="utf8") as fp_write_tgt:
