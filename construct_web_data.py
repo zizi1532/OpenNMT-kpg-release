@@ -34,7 +34,11 @@ for in_path in in_path_ls:
                 for k, v in content_dict.items()
                 if k in FIELDS
             }
-            print(src_dict)
+            try:
+                print(src_dict)
+            except:
+                for k, v in src_dict.items():
+                    print(k, v.encode("utf8"))
             tgt = content_dict["present_click_query_list"]\
                 if "present_click_query_list" in content_dict\
                 else  content_dict["click_query_list"]
