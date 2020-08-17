@@ -21,6 +21,11 @@ FIELDS = [
 
     # '#QUERY_TEXT:', '#URL:', '#CLICK_COUNT',
 ]
+def preprocess(v):
+    if "\t" in v:
+        return v.split("\t")[1]
+    else:
+        return v
 in_path_ls = [IN_DIR + in_path for in_path in sorted(os.listdir(IN_DIR))]
 for in_path in in_path_ls:
     with open(in_path, "r", encoding="utf8") as fp:
@@ -29,15 +34,10 @@ for in_path in in_path_ls:
             url, gdid, raw_content = line.strip().split("\t")
             content_dict = json.loads(raw_content)
             src_dict = {
-                k:v
+                k:preprocess(v)
                 for k, v in content_dict.items()
                 if k in FIELDS
             }
-            try:
-                print(src_dict)
-            except:
-                for k, v in src_dict.items():
-                    print(k, v.encode("utf8"))
             tgt = content_dict["present_click_query_list"]\
                 if "present_click_query_list" in content_dict\
                 else  content_dict["click_query_list"]
